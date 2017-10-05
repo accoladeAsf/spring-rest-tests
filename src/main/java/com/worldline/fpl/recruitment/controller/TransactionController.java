@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.worldline.fpl.recruitment.json.AccountDetailsResponse;
 import com.worldline.fpl.recruitment.json.TransactionResponse;
 
 /**
  * Transaction controller
- * 
+ *
  * @author A525125
  *
  */
@@ -22,7 +23,7 @@ public interface TransactionController {
 
 	/**
 	 * Get transaction list by account
-	 * 
+	 *
 	 * @param accountId
 	 *            the account id
 	 * @param p
@@ -33,4 +34,9 @@ public interface TransactionController {
 	ResponseEntity<Page<TransactionResponse>> getTransactionsByAccount(
 			@PathVariable("accountId") String accountId,
 			@PageableDefault Pageable p);
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+	ResponseEntity<Boolean> deleteTransaction(
+			@PathVariable("accountId") String accountId,
+			@PathVariable("id") String id);
 }

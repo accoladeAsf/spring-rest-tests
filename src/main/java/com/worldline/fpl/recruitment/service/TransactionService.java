@@ -16,7 +16,7 @@ import com.worldline.fpl.recruitment.json.TransactionResponse;
 
 /**
  * Transaction service
- * 
+ *
  * @author A525125
  *
  */
@@ -36,7 +36,7 @@ public class TransactionService {
 
 	/**
 	 * Get transactions by account
-	 * 
+	 *
 	 * @param accountId
 	 *            the account id
 	 * @param p
@@ -56,7 +56,7 @@ public class TransactionService {
 
 	/**
 	 * Map {@link Transaction} to {@link TransactionResponse}
-	 * 
+	 *
 	 * @param transaction
 	 * @return
 	 */
@@ -66,6 +66,19 @@ public class TransactionService {
 		result.setId(transaction.getId());
 		result.setNumber(transaction.getNumber());
 		return result;
+	}
+
+	public boolean deleteTransaction(String accountId,String id)
+	{
+		if (!accountService.isAccountExist(accountId)) {
+			throw new ServiceException(ErrorCode.NOT_FOUND_ACCOUNT,
+					"Account doesn't exist");
+		}
+		if (transactionRepository.findById(id) == null) {
+			throw new ServiceException(ErrorCode.NOT_FOUND_TRANSACTION,
+					"Transaction doesn't exist");
+		}
+		return transactionRepository.deleteTransaction(id);
 	}
 
 }

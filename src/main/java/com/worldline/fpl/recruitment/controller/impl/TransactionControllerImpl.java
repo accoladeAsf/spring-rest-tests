@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Implementation of {@link TransactionController}
- * 
+ *
  * @author A525125
  *
  */
@@ -43,5 +43,16 @@ public class TransactionControllerImpl implements TransactionController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		}
 		return ResponseEntity.ok().body(page);
+	}
+
+	@Override
+	public ResponseEntity<Boolean> deleteTransaction(
+			@PathVariable("accountId") String accountId,
+			@PathVariable("id") String id) {
+		boolean result = transactionService.deleteTransaction(accountId,id);
+		if(!result){
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(result);
+		}
+		return ResponseEntity.ok().body(result);
 	}
 }

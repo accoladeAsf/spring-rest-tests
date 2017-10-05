@@ -7,7 +7,7 @@ import com.worldline.fpl.recruitment.entity.Transaction;
 
 /**
  * Transaction repository
- * 
+ *
  * @author A525125
  *
  */
@@ -25,7 +25,7 @@ public interface TransactionRepository {
 
 	/**
 	 * Get transactions by account
-	 * 
+	 *
 	 * @param accountId
 	 *            the account id
 	 * @param p
@@ -33,4 +33,17 @@ public interface TransactionRepository {
 	 * @return
 	 */
 	Page<Transaction> getTransactionsByAccount(String accountId, Pageable p);
+
+	/**
+	 *  Delete transaction by Id
+	 *
+	 * @param id
+	 *            id of the transaction to delete
+	 *
+	 * @param accountId
+	 *            the account id
+	 *
+	 *  @return boolean
+	 */
+	boolean deleteTransaction(String id);
 }

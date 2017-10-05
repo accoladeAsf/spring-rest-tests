@@ -16,7 +16,7 @@ import com.worldline.fpl.recruitment.entity.Transaction;
 
 /**
  * Implementation of {@link TransactionRepository}
- * 
+ *
  * @author A525125
  *
  */
@@ -68,6 +68,19 @@ public class TransactionRepositoryImpl implements TransactionRepository,
 		return new PageImpl<Transaction>(transactions.stream()
 				.filter(t -> t.getAccountId().equals(accountId))
 				.collect(Collectors.toList()));
+	}
+
+	@Override
+	public boolean deleteTransaction(String id) {
+
+		Transaction transactionToRemove = findById(id);
+		transactions.remove(transactionToRemove);
+
+		boolean result=false;
+        if(findById(id)==null){
+        	result = true;
+        }
+       return result;
 	}
 
 }
